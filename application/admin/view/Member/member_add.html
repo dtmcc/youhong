@@ -1,0 +1,79 @@
+﻿{extend name="Adminpublic:public"}
+{block name="title"}会员管理{/block}
+{block name="main"}
+
+<nav class="breadcrumb">
+	<i class="Hui-iconfont"></i> 
+	<a href="/admin/index" class="maincolor">首页</a> 
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">会员管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">会员添加</span>
+</nav>
+<div class="Hui-article">
+	<article class="cl pd-20">
+		<form action="/adminmember/domember_add" method="post" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="请输入添加会员用户名" id="username" name="username">
+			</div>
+			<i></i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="请输入添加会员密码" id="password" name="password">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" placeholder="请输入添加会员邮箱" name="email" >
+			</div>
+			<i></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机号：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="请输入添加会员手机号" id="mobile" name="phone">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-4">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确认添加&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+	</article>
+</div>
+
+{/block}
+
+{block name="script"}
+	<script type="text/javascript">
+		$("input[name='username']").blur(function(){
+			ob=$(this);
+			username=$("input[name='username']").val();
+			$.get("/adminajax/doajax_username",{username:username},function(data){
+			  	if (data == '00') {
+			  		ob.parent("div").next("i").html("　　该用户名已经存在，请更换");
+			  		ob.parent("div").next("i").css("color","red");
+			  	}
+			  });
+		});
+		$("input[name='email']").blur(function(){
+			ob=$(this);
+			email=$("input[name='email']").val();
+			$.get("/adminajax/doajax_email",{email:email},function(data){
+			  	if (data == '00') {
+			  		ob.parent("div").next("i").html("　　该邮箱已经被占用，请更换");
+			  		ob.parent("div").next("i").css("color","red");
+			  	}
+			  });
+		});
+	</script>
+
+{/block}

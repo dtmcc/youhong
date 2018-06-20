@@ -1,0 +1,51 @@
+{extend name="Homepublic:p_public" /}
+{block name="title"}商品评价{/block}
+{block name="topscript"}
+<link type="text/css" rel="stylesheet" href="/static/home/css/style.css" />
+<script type="text/javascript" src="/static/home/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/static/home/js/menu.js"></script>    
+<script type="text/javascript" src="/static/home/js/select.js"></script>       
+{/block}
+{block name="main"}
+<div class="m_right">
+  
+  <div class="mem_tit" >评价详情</div>
+    <table border="0" class="order_tab" style="width:930px;"  cellspacing="0" cellpadding="0" >
+      <thead>
+       <tr style="text-align:center;background-color: #F6F6F6;">
+        <td width="20%">订单号</td>
+        <td width="10%">商品名称</td>
+        <td width="10%">缩略图</td>
+        <td width="10%">评价等级</td>
+        <td width="20%">评价时间</td>
+        <td width="35%">评价内容</td>
+      </tr>
+      </thead>
+      <tbody style="text-align: center;">
+      {foreach name="com_info" item="row"}
+        <tr>
+          <td>{$row['o_code']}</td>
+          <td>{$row['p_info']['name']}</td>
+          <td><img src="{$row['p_info']['opic']}" alt="" style="width: 100px;height: 40px;"></td>
+          <td>
+          {switch name="$row.grade"}
+              {case value="1"}<span>好评</span>{/case}
+              {case value="2"}<span>中评</span>{/case}
+              {case value="2"}<span>差评</span>{/case}
+              {default /}default
+          {/switch}
+          </td>
+          <td>{$row['addtime']|date="Y-m-d H:i:s",###}</td>
+          <td>{$row['text']}</td>
+        </tr>
+      {/foreach}
+      </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+</script>
+{/block}
+{block name="script"}
+{/block}

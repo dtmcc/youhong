@@ -1,0 +1,57 @@
+﻿{extend name="Adminpublic:public"}
+{block name="title"}角色管理{/block}
+{block name="main"}
+
+<nav class="breadcrumb">
+	<i class="Hui-iconfont"></i> 
+	<a href="/admin/index" class="maincolor">首页</a> 
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">角色管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">角色添加</span>
+</nav>
+<div class="Hui-article">
+	<article class="cl pd-20">
+		<form action="/adminrole/dorole_add" method="post" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="请输入添加的角色名"  name="rname">
+			</div>
+			<i></i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>备注：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="请输入对该角色的备注（可无）"  name="remark">
+			</div>
+		</div>
+		
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-4">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确认添加&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+	</article>
+</div>
+
+{/block}
+
+{block name="script"}
+	<script type="text/javascript">
+		$("input[name='username']").blur(function(){
+			ob=$(this);
+			username=$("input[name='username']").val();
+			$.get("/adminmember/doajax_username",{username:username},function(data){
+			  	if (data == '00') {
+			  		ob.parent("div").next("i").html("　　该用户名已经存在，请更换");
+			  		ob.parent("div").next("i").css("color","red");
+			  	}
+			  });
+		});
+	</script>
+
+{/block}

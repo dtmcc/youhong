@@ -1,0 +1,75 @@
+{extend name="Homepublic:p_public" /}
+{block name="title"}我的收藏{/block}
+{block name="topscript"}
+<link type="text/css" rel="stylesheet" href="/static/home/css/style.css" />
+<script type="text/javascript" src="/static/home/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/static/home/js/menu.js"></script>    
+<script type="text/javascript" src="/static/home/js/select.js"></script>       
+{/block}
+
+{block name="main"}
+<div class="m_right">
+            <p></p>
+            <div class="mem_tit">
+              <span class="fr" style="font-size:12px; color:#55555; font-family:'宋体'; margin-top:5px;">共发现4件</span>我的收藏
+            </div>
+            <table border="0" class="order_tab" style="width:930px;" cellspacing="0" cellpadding="0">
+              <tbody>
+              <tr>                                            
+                <td align="center" width="80">商品缩略图</td>
+                <td align="center" width="180">商品名称</td>
+                <td align="center" width="420">商品简介</td>
+                <td align="center" width="180">价格</td>
+                <td align="center" width="270">操作</td>
+              </tr>
+              {foreach name="c_info" item="row"}
+              <tr>
+                <td style="font-family:'宋体';" align="center">
+                  <img src="{$row['p_info']['opic']}" width="48" height="48">
+                </td>
+                <td align="center">{$row['p_info']['name']}</td>
+                <td align="center">{$row['p_info']['content']}</td>
+                <td align="center">￥{$row['p_info']['price']}</td>
+                <td align="center">
+                <a href="javascript:void(0)" class="j_car" k="{$row['p_id']}" style="color:#ff4e00;">加入购物车</a>&nbsp; &nbsp; 
+                <a href="javascript:void(0)" class="d_coll"  k="{$row['p_id']}">取消收藏</a></td>
+              </tr>
+              {/foreach}
+              
+            </tbody>
+
+
+          </table>
+            <script type="text/javascript" src="/static/jquery-1.8.3.min.js"></script> 
+            <script type="text/javascript">
+                $(".j_car").click(function(){
+                  k=$(this).attr("k");
+                  ob=$(this);
+                  $.post("/homepersonal/j_car",{k:k},function(data){
+                    if (data == "2") {
+                      alert("商品已经添加过购物车！");
+                      ob.parents("tr").remove();
+                    }
+                    if (data == "1") {
+                      alert("商品已经成功添加至购物车！");
+                      ob.parents("tr").remove();
+                    }
+                  })
+                });
+                $(".d_coll").click(function(){
+                  k=$(this).attr("k");
+                  ob=$(this);
+                  $.post("/homepersonal/d_coll",{k:k},function(data){
+                    if (data == "1") {
+                      alert("取消收藏成功！");
+                      ob.parents("tr").remove();
+                    }
+                  })
+                });
+            </script>
+
+            
+        </div>
+{/block}
+{block name="script"}
+{/block}

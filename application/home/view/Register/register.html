@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link type="text/css" rel="stylesheet" href="/static/home/css/style.css" />   
+  <script type="text/javascript" src="/static/home/js/jquery-1.11.1.min_044d0927.js"></script>
+	<script type="text/javascript" src="/static/home/js/jquery.bxslider_e88acd1b.js"></script>
+  <script type="text/javascript" src="/static/home/js/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" src="/static/home/js/menu.js"></script>        
+	<script type="text/javascript" src="/static/home/js/select.js"></script> 
+	<script type="text/javascript" src="/static/home/js/lrscroll.js"></script>
+  <script type="text/javascript" src="/static/home/js/iban.js"></script>
+  <script type="text/javascript" src="/static/home/js/fban.js"></script>
+  <script type="text/javascript" src="/static/home/js/f_ban.js"></script>
+  <script type="text/javascript" src="/static/home/js/mban.js"></script>
+  <script type="text/javascript" src="/static/home/js/bban.js"></script>
+  <script type="text/javascript" src="/static/home/js/hban.js"></script>
+  <script type="text/javascript" src="/static/home/js/tban.js"></script>
+	<script type="text/javascript" src="/static/home/js/lrscroll_1.js"></script>  
+<title>尤洪商城--注册</title>
+</head>
+<body>  
+<!--Begin Header Begin-->
+<!-- <div class="soubg">
+	<div class="sou">
+        <span class="fr">
+        	<span class="fl">你好，请<a href="Login.html">登录</a>&nbsp;<a href="Regist.html" style="color:#ff4e00;">免费注册&nbsp;</a> </span>
+            <span class="fl">|&nbsp;关注我们：</span>
+            <span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
+            <span class="fr">|&nbsp;<a href="#">手机版&nbsp;<img src="/static/home/images/s_tel.png" align="absmiddle" /></a></span>
+        </span>
+    </div>
+</div> -->
+<!--End Header End--> 
+<!--Begin Login Begin-->
+<div class="log_bg">	
+    <div class="top">
+        <div class="logo"><a href="Index.html"><img src="/static/home/images/logo.png" /></a></div>
+    </div>
+	<div class="regist">
+    <div class="log_img"><img src="/static/home/images/l_img.png" width="611" height="425" /></div>
+		<div class="reg_c">
+        	<form action="/homeregister/doregister" method="post" >
+          <br />
+            <table border="0" style="width:420px; font-size:14px; margin-top:20px;" cellspacing="0" cellpadding="0">
+              <tr height="50" valign="top">
+              	<td width="95">&nbsp;</td>
+                <td>
+                	<span class="fl" style="font-size:24px;">注册</span>
+                    <span class="fr">已有商城账号，<a href="/homelogin/login" style="color:#ff4e00;">我要登录</a></span>
+                </td>
+              </tr>
+              <tr height="50">
+                <td align="right"><font color="#ff4e00">*</font>&nbsp;用户名 &nbsp;</td>
+                <td><input type="text" value="" name="username" class="l_user" placeholder="请输入用户名" /></td>
+              </tr>
+              <tr height="50">
+                <td align="right"><font color="#ff4e00">*</font>&nbsp;密码 &nbsp;</td>
+                <td><input type="password" value="" name="password" placeholder="请输入密码" class="l_pwd" /></td>
+              </tr>
+              <tr height="50">
+                <td align="right"><font color="#ff4e00">*</font>&nbsp;确认密码 &nbsp;</td>
+                <td><input type="password" value="" name="repassword" placeholder="请重复输入密码" class="l_pwd" /></td>
+              </tr>
+              <tr height="50">
+                <td align="right"><font color="#ff4e00">*</font>&nbsp;邮箱 &nbsp;</td>
+                <td><input type="text" value="" name="email" placeholder="请输入邮箱" class="l_email" /></td>
+              </tr>
+              <tr height="50">
+                <td align="right"><font color="#ff4e00">*</font>&nbsp;手机号 &nbsp;</td>
+                <td><input type="text" value="" name="phone" placeholder="请输入手机号" class="l_tel" /></td>
+              </tr>
+              
+              <tr height="50">
+                <td align="right"> <font color="#ff4e00">*</font>&nbsp;验证码 &nbsp;</td>
+                <td>
+                    <input type="text" name="code" value="" placeholder="请输入验证码" class="l_ipt" />
+                    <a href="javascript:" onclick="sendcode(this)" style="font-size: 16px;margin-left: 30px;">获取验证码</a>
+                </td>
+              </tr>
+
+              {if condition="empty($p_matt) neq true"}
+              <input type="hidden" name="p_matt" value="{$p_matt}" />
+              {else /}
+              <tr height="50">
+                <td align="right">邀请码&nbsp;</td>
+                <td><input type="text" value="" name="p_matt" class="l_num" placeholder="无可不填写" /></td>
+              </tr>
+              {/if}
+
+              <tr height="50">
+                <td colspan="2" class="warn" align="center">&nbsp;</td>
+              </tr>
+
+              <tr>
+              	<td>&nbsp;</td>
+                <td style="font-size:12px; padding-top:20px;">
+                	<span style="font-family:'宋体';" class="fl">
+                    	<label class="r_rad"><input type="checkbox" /></label><label class="r_txt">我已阅读并接受《用户协议》</label>
+                    </span>
+                </td>
+              </tr>
+              <tr height="60">
+              	<td>&nbsp;</td>
+                <td><input type="submit"  value="立即注册" class="log_btn" /></td>
+              </tr>
+            </table>
+            </form>
+        </div>
+    </div>
+</div>
+<!--End Login End--> 
+<!--Begin Footer Begin-->
+<div class="btmbg">
+    <div class="btm">
+        备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com   Copyright © 2015-2018 尤洪商城网 All Rights Reserved. 复制必究 , Technical Support: Dgg Group <br />
+        <img src="/static/home/images/b_1.gif" width="98" height="33" /><img src="/static/home/images/b_2.gif" width="98" height="33" /><img src="/static/home/images/b_3.gif" width="98" height="33" /><img src="/static/home/images/b_4.gif" width="98" height="33" /><img src="/static/home/images/b_5.gif" width="98" height="33" /><img src="/static/home/images/b_6.gif" width="98" height="33" />
+    </div>    	
+</div>
+<!--End Footer End -->    
+
+</body>
+<script src="/static/home/js/jquery-1.8.2.min.js"></script>
+  <script>
+  // 失去焦点时候
+    $("input[name=username]").blur(function(){
+        username=$(this).val();
+        if (username == "") {
+          $(".warn").html("用户名不能为空！").attr("style","font-size:16px;color:red");
+        }else{
+          $.post("/homeregister/checkuser",{username:username},function(data){
+            if(data == 1){
+              $(".warn").html("用户名已存在,请更换！").attr("style","font-size:16px;color:red");
+            }else{
+              $(".warn").html("用户名可以使用！").attr("style","font-size:16px;color:green");
+            } 
+          })
+        }  
+    })
+    $("input[name=password]").blur(function(){
+      pval=$(this).val();
+        if(pval==""){
+          $(".warn").html("密码不能为空！").attr("style","font-size:16px;color:red");
+        }
+    })
+    $("input[name=repassword]").blur(function(){
+      rpval=$(this).val();
+      ppval=$("input[name=password]").val();
+      if(rpval!==ppval){
+        $(".warn").html("两次密码不一致,或重复密码为空").attr("style","font-size:16px;color:red");
+      }else{
+        $(".warn").html("重复密码验证通过！").attr("style","font-size:16px;color:green");
+      }
+    })
+    $("input[name=email]").blur(function(){
+        email=$(this).val();
+        var ret = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+          if(ret.test(email)){
+            $.post("/homeregister/checkemail",{email:email},function(data){
+              // alert(data);
+                if(data == 1){
+                  $(".warn").html("邮箱已被占用,请更换！").attr("style","font-size:16px;color:red");
+                }else{
+                  $(".warn").html("邮箱验证通过！").attr("style","font-size:16px;color:green");
+                }
+              })
+          }else{
+            $(".warn").html("邮箱格式不正确").attr("style","font-size:16px;color:red");
+          }
+    })
+    $("input[name=phone]").blur(function(){
+        phone=$(this).val();
+        var ret = /^[\d]{11}$/;
+       if(!ret.test(phone)){
+         $(".warn").html("手机号码格式不正确！").attr("style","font-size:16px;color:red");
+       }else{
+         $(".warn").html("手机号码验证通过！").attr("style","font-size:16px;color:green");
+       }
+    })
+    function sendcode($this){
+      phone=$("input[name=phone]").val();
+      $("a").html("　　80秒内有效").attr({"style":"font-size:18px;color:red;","pointer-events":"none"});
+      $.post("/homeregister/phones",{phone:phone},function(data){
+             for(var i=0;i<data.length;i++){
+                if(data[i].resp.respCode==000000){
+                  m=80;
+                  mytime=setInterval(function(){
+                      m--;
+                      $("a").html("　　"+m+"秒内有效").attr({"style":"font-size:18px;color:red;","disabled":true});
+                      if(m==0){
+                        clearInterval(mytime);
+                        $("a").html("　　获取验证码");
+                      }
+                  },1000);     
+                }
+             }
+           },"json");
+    }
+
+  </script>
+</html>

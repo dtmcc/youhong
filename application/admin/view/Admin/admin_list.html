@@ -1,0 +1,81 @@
+﻿{extend name="Adminpublic:public"}
+{block name="title"}管理员管理{/block}
+{block name="main"}
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="text-c">
+				<input type="text" class="input-text" style="width:250px" placeholder="输入会员名称、电话或邮箱" id="" name="">
+				<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+			</div>
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+			<span class="l">
+				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
+				<a href="javascript:;" onclick="member_add('添加用户','/adminmember/member_add_t','','510')" class="btn btn-primary radius">
+				<i class="Hui-iconfont">&#xe600;</i> 添加用户</a>
+			</span> 
+
+			<span class="r">共有数据：<strong>88</strong> 条</span> 
+
+			</div>
+			<div class="mt-20">
+				<table class="table table-border table-bordered table-hover table-bg table-sort">
+					<thead>
+						<tr class="text-c">
+							<th width="25"><input type="checkbox" name="" value=""></th>
+							<th width="35">ID</th>
+							<th width="100">用户名</th>
+							<th width="90">手机号</th>
+							<th width="150">邮箱</th>
+							<th width="40">性别</th>
+							<th width="280">角色</th>
+							<th width="130">注册时间</th>
+							<th width="100">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					{foreach name="data" item="row"}
+						<tr class="text-c">
+							<td><input type="checkbox" value="1" name=""></td>
+							<td>{$row['id']}</td>
+							<td><u style="cursor:pointer" class="text-primary" onclick="member_show('张三','member-show.html','10001','360','400')">{$row['username']}</u></td>
+							<td>{$row['phone']}</td>
+							<td>{$row['email']}</td>
+							<td>{$sexarr[$row['sex']]}</td>
+							<td>1</td>
+							<td >{$row['jointime']|date="Y-m-d H:i",###}</td>
+							<td class="td-manage">
+							<a title="编辑" href="/adminadmin/admin_edit/id/{$row['id']}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>&nbsp; 
+							
+							<a style="text-decoration:none" onClick="admin_stop(this,'{$row['id']}')" href="javascript:;" title="取消管理权限"><i class="Hui-iconfont">&#xe631;</i></a> &nbsp; 
+
+							<a style="text-decoration:none" href="/adminadmin/rolelist/id/{$row['id']}" title="分配角色"><i class="Hui-iconfont">&#xe63c;</i></a> &nbsp; 
+						</tr>
+					{/foreach}
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</div>
+
+{/block}
+
+{block name="script"}
+<script type="text/javascript" src="/static/admin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+/*用户-停用*/
+function admin_stop(obj,id){
+	layer.confirm('确认停用其管理员权限？',function(index){
+		//修改数据库状态
+		$.post("/adminajax/admin_status_stop",{id:id},function(data){})
+		$(obj).parents("tr").remove();
+		layer.msg('已停用!',{icon: 5,time:1000});
+	});
+}
+</script>
+{/block}

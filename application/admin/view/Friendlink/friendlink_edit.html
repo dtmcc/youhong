@@ -1,0 +1,66 @@
+{extend name="Adminpublic:public"}
+{block name="title"}友情链接管理{/block}
+{block name="main"}
+<link href="/static/admin/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<nav class="breadcrumb">
+	<i class="Hui-iconfont"></i> 
+	<a href="/admin/index" class="maincolor">首页</a> 
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">友情链接管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">友情链接添加</span>
+</nav>
+<div class="Hui-article">
+	<article class="cl pd-20">
+		<form action="/adminfriendlink/Dofriendlink_edit" method="post" class="form form-horizontal" id="form-article-add" >
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>网站名称：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$data['name']}" id="" name="name">
+			</div>
+			<i></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>URL地址：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$data['url']}"  name="url">
+			</div>
+			<i></i>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">站长邮箱：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" name="email"  value="{$data['email']}" class="input-text" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">状态：</label>
+			<!-- <div class="formControls col-xs-8 col-sm-4 "> -->
+				<div class="radio-box">
+					<input type="radio" id="status-3" name="status" {if condition="$data['status']=='0'"}checked{/if} value="0">
+					<label for="status-3">新申请</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="status-2" name="status" {if condition="$data['status']=='2'"}checked{/if} value="2">
+					<label for="status-2">未通过</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" name="status" id="status-1" {if condition="$data['status']=='1'"}checked{/if} value="1">
+					<label for="status-1">已通过</label>
+				</div>	
+			<!-- </div> -->
+		</div>
+		
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+			<input type="hidden" name="id" value="{$data['id']}">
+			<button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认添加</button>
+			</div>
+		</div>
+	</form>
+	</article>
+</div>
+
+{/block}

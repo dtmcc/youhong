@@ -1,0 +1,83 @@
+{extend name="Adminpublic:public"}
+{block name="title"}公告管理{/block}
+{block name="main"}
+<script type="text/javascript" charset="utf-8" src="/static/admin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/admin/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/static/admin/ueditor/lang/zh-cn/zh-cn.js"></script>
+<style type="text/css">
+    div{
+        width:100%;
+    }
+</style>
+<link href="/static/admin/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<nav class="breadcrumb">
+	<i class="Hui-iconfont"></i> 
+	<a href="/admin/index" class="maincolor">首页</a> 
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">广告管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">版位修改</span>
+</nav>
+<div class="Hui-article">
+	<article class="cl pd-20">
+		<form action="/adminadver/Doadver_edit" method="post" class="form form-horizontal" id="form-article-add"  enctype="multipart/form-data" >
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>版位ID：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" name="title" class="input-text" value="{$ad_info['id']}" disabled="" >
+			</div>
+			<i style="color: red;">版位ID禁止修改</i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>版位名称：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" name="adv_name" class="input-text" value="{$ad_info['adv_name']}" >
+			</div>
+			<i></i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>详细介绍：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" name="adv_des" class="input-text" value="{$ad_info['adv_des']}"  >
+			</div>
+			<i></i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>广告位数：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" name="" class="input-text" value="{$ad_info['adv_num']}" disabled="">
+			</div>
+			<i style="color: red;">广告位数禁止修改</i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>图片宽度：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" name="" class="input-text" value="{$ad_info['width']}px" disabled="">
+			</div>
+			<i style="color: red;">图片宽度禁止修改</i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>图片高度：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" name="" class="input-text" value="{$ad_info['height']}px" disabled="">
+			</div>
+			<i style="color: red;">图片高度禁止修改</i>
+		</div>
+		
+		
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+			<input type="hidden" name="id" value="{$ad_info['id']}">
+			<button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认修改</button>
+			</div>
+		</div>
+	</form>
+	</article>
+</div>
+
+{/block}

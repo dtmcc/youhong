@@ -1,0 +1,65 @@
+{extend name="Adminpublic:public"}
+{block name="title"}留言管理{/block}
+{block name="main"}
+<link href="/static/admin/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<nav class="breadcrumb">
+	<i class="Hui-iconfont"></i> 
+	<a href="/admin/index" class="maincolor">首页</a> 
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">留言管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">留言回复</span>
+</nav>
+<div class="Hui-article">
+	<article class="cl pd-20">
+		<form action="/adminmessage/Domessage_edit" method="post" class="form form-horizontal" id="form-article-add" >
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>留言用户：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$mes_info['username']}" disabled="">
+			</div>
+			<i></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>类型：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$mes_info['type']}" disabled="">
+			</div>
+			<i></i>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">留言主题：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" name=""  value="{$mes_info['theme']}" class="input-text" disabled="">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">留言内容：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+			<textarea name="" id="" cols="50" rows="6" disabled="">{$mes_info['content']}</textarea>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">回复内容：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+			<textarea name="replay"  cols="50" rows="6" ></textarea>
+				<!-- <input type="text" name=""  value="" class="input-text" > -->
+			</div>
+		</div>
+		
+		
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+			<input type="hidden" name="id" value="{$mes_info['id']}">
+			<button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认回复</button>
+			</div>
+		</div>
+	</form>
+	</article>
+</div>
+
+{/block}

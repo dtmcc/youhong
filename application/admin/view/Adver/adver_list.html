@@ -1,0 +1,76 @@
+﻿{extend name="Adminpublic:public"}
+{block name="title"}广告管理{/block}
+{block name="main"}
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+<span class="c-gray en">&gt;</span> 广告管理
+<span class="c-gray en">&gt;</span> 广告版位列表
+<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+			<span class="l">
+				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
+
+				<!-- <a href="javascript:;" onclick="member_add('添加用户','/adminmember/member_add_t','','510')" class="btn btn-primary radius"> -->
+				<!-- <i class="Hui-iconfont">&#xe600;</i> 添加商品 -->
+				<!-- </a> -->
+			</span> 
+
+			<span class="r">共有数据：<strong>88</strong> 条</span> 
+
+			</div>
+			<div class="mt-20">
+				<table class="table table-border table-bordered table-hover table-bg table-sort">
+					<thead>
+						<tr class="text-c">
+							<th width="25"><input type="checkbox" name="" value=""></th>
+							<th width="30">ID</th>
+							<th width="100">版位名称</th>
+							<th width="200">版位描述</th>
+							<th width="100">版位尺寸(px)</th>
+							<th width="50">版位数量</th>
+							<th width="100">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					{foreach name="a_info" item="row"}
+						<tr class="text-c">
+							<td><input type="checkbox" value="1" name=""></td>
+							<td>{$row['id']}</td>
+							<td>{$row['adv_name']}</td>
+							<td>{$row['adv_des']}</td>
+							<td>{$row['width']} * {$row['height']}</td>
+							<td>{$row['adv_num']}</td>
+							<td class="td-manage">	
+							<a style="text-decoration:none" href="/adminadver/adver_edit/id/{$row['id']}" title="编辑" class="ml-5" ><i class="Hui-iconfont">&#xe6df;</i></a>
+							
+							<a style="text-decoration:none" href="javascript:void(0)" onClick="adver_del(this,'{$row['id']}')" title="删除" class="ml-5"><i class="Hui-iconfont">&#xe609;</i></a>
+
+							<a style="text-decoration:none" href="/adminadverpro/adverpro_add/id/{$row['id']}" title="添加该版位广告" class="ml-5"><i class="Hui-iconfont">&#xe600;</i></a>
+							
+							<a style="text-decoration:none" href="/adminadverpro/adverpro_list/id/{$row['id']}" title="查看该版位广告列表" class="ml-5"><i class="Hui-iconfont">&#xe667;</i></a>
+							</td>
+						</tr>
+					{/foreach}
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</div>
+
+{/block}
+
+{block name="script"}
+	<script>
+		function adver_del(obj,id){
+			layer.confirm('确认要删除吗？',function(index){
+				// 修改数据库状态
+				$.post("/adminadver/adver_del",{id:id},function(data){});
+				$(obj).parents("tr").remove();
+				layer.msg('已删除!',{icon:1,time:1000});
+			});
+		}
+	</script>
+{/block}

@@ -1,0 +1,176 @@
+{extend name="Homepublic:public" /}
+{block name="title"}查看购物车{/block}
+{block name="topscript"}
+<link type="text/css" rel="stylesheet" href="/static/home/css/style.css" />
+<script type="text/javascript" src="/static/home/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/static/home/js/menu.js"></script>    
+<script type="text/javascript" src="/static/home/js/n_nav.js"></script>   
+<script type="text/javascript" src="/static/home/js/num.js">
+var jq = jQuery.noConflict();
+</script>     
+<script type="text/javascript" src="/static/home/js/shade.js"></script>
+{/block}
+{block name="main"}
+    <div class="content mar_20">
+        <img src="/static/home/images/img1.jpg" />        
+    </div>
+    
+    <!--Begin 第一步：查看购物车 Begin -->
+    <div class="content mar_20">
+        <form action="/homecar/car_two" method="post" onsubmit="return verify()" >
+            <table border="0" class="car_tab" style="width:1200px; margin-bottom:50px;" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="car_th" width="20"></td>
+                <td class="car_th" width="80">商品简略图</td>
+                <td class="car_th" width="140">商品名称</td>
+                <td class="car_th" width="490">商品简介</td>
+                <td class="car_th" width="120">商品单价</td>
+                <td class="car_th" width="150">购买数量</td>
+                <td class="car_th" width="120">小计</td>
+                <td class="car_th" width="140">预计返还积分</td>
+                <td class="car_th" width="150">操作</td>
+              </tr>
+              {foreach name="c_info" item="row"}
+              <tr class="car_tr">
+                <td>
+                <input class="check" id="select{$row['p_id']}" name="c_id[]" value="{$row['id']}" onclick="sum()" type="checkbox">
+                
+                </td>
+                <td>
+                    <div class="c_s_img"><img src="{$row['p_info']['opic']}" width="73" height="73" /></div>
+                </td>
+                <td align="center">{$row['p_info']['name']}</td>
+                <td align="center">{$row['p_info']['content']}</td>
+                <td align="center">￥{$row['p_info']['price']}</td>
+                <td align="center">
+                    <div class="c_num">
+                        <!-- <input type="button" value="" onclick="jianUpdate1(jq(this));" class="car_btn_1" /> -->
+                        <input type="button" value="" class="car_btn_1 car_red{$row['id']}" k="{$row['id']}" source="{$row['source']}"/>
+                        <input type="text" value="{$row['num']}" name="" class="car_ipt" />  
+                        <input type="button" value="" class="car_btn_2 car_add{$row['id']}" k="{$row['id']}" source="{$row['source']}"/>
+                        <!-- <input type="button" value="" onclick="addUpdate1(jq(this));" class="car_btn_2" /> -->
+                    </div>
+                </td>
+                <td align="center" class="xiaoji{$row['id']} xiaoji" style="color:#ff4e00;">￥{$row['p_info']['price']*$row['num']}</td>
+                <td align="center" class="jifen{$row['id']}">{$row['p_info']['price']*$row['num']*0.1}R</td>
+                <td align="center"><a href="#">加入收藏</a>&nbsp;<a href="#">删除</a></td>
+              </tr>
+              {/foreach}    
+              <tr height="70">
+                <td colspan="9" style="font-family:'Microsoft YaHei'; border-bottom:0;">
+                    <label class="r_rad"><input type="checkbox" name="clear"  />全选</label>
+                    <label class="r_txt">&nbsp;&nbsp;&nbsp;<a href="">清空购物车</a></label>
+                    <span class="fr">商品总价：<b style="font-size:22px; color:#ff4e00;" class="total">￥0.00</b></span>
+                    <input type="hidden" name="total" value="11">
+                </td>
+              </tr>
+              <tr valign="top" height="150">
+                <td colspan="9" align="right">
+                    <a href="/homeindex/index"><img src="/static/home/images/buy1.gif" /></a>&nbsp; &nbsp;
+                    <input type="submit" value="确认结算" style="width: 180px;height: 45px;background-color: #F95309;border: 0px;border-radius: 2px;margin-top:-40px; ">
+                    <!-- <a href="javascript:;" class="J_go" ><img src="/static/home/images/buy2.gif" /></a> -->
+                </td>
+              </tr>
+            </table>
+        </form>
+    </div>
+    
+    <!--End 第一步：查看购物车 End-->
+{/block}
+{block name="script"}
+<script type="text/javascript" src="/static/jquery-1.8.3.min.js"></script> 
+    <script type="text/javascript">
+            //验证未选择不能提交
+        function verify(){
+            a=$(".total").html();
+            if (a=='￥0.00') {
+              alert('请至少选择一件商品');
+              return false;
+            }else{
+              return true;
+            }
+        }
+        //按钮的减 red 操作
+        $(".car_btn_1").click(function(){
+            id=$(this).attr("k");
+            source=$(this).attr("source");
+            ob=$(this);
+
+            $.ajax({
+                url:"/homecar/car_red",    
+                dataType:"json",
+                async:false,
+                data:{"id":id,"source":source},
+                type:"POST",
+                success:function(data){
+                    ob.next("input").val(data.num);
+                    $(".xiaoji"+id).html('￥'+data.tot);
+                    $(".jifen"+id).html(data.scores+'R');
+                    if (data.error == "3") {
+                        alert("亲，不能再少了啦！");
+                    }
+                },
+                error:function(){
+                    //请求出错处理
+                }
+            });
+            sum(id);
+            // $.post("/homecar/car_red",{id:id,source:source},function(data){
+            //     ob.next("input").val(data.num);
+            //     $(".xiaoji"+id).html('￥'+data.tot);
+            //     $(".jifen"+id).html(data.scores+'R');
+            //     if (data.error == "3") {
+            //         alert("亲，不能再少了啦！");
+            //     }
+            // },'json');
+        });
+        //按钮的加 add 操作
+        $(".car_btn_2").click(function(){
+            id=$(this).attr("k");
+            source=$(this).attr("source");
+            ob=$(this);
+            // $.post("/homecar/car_add",{id:id,source:source},function(data){
+            //     // alert(data);
+            //     ob.prev("input").val(data.num);
+            //     $(".xiaoji"+id).html('￥'+data.tot);
+            //     $(".jifen"+id).html(data.scores+'R');
+            //     if (data.error == "3") {
+            //         alert("亲，库存不足，不能再多了啦！");
+            //     }
+            // },'json');
+            $.ajax({
+                url:"/homecar/car_add",    
+                dataType:"json",
+                async:false,
+                data:{"id":id,"source":source},
+                type:"POST",
+                success:function(data){
+                    ob.prev("input").val(data.num);
+                    $(".xiaoji"+id).html('￥'+data.tot);
+                    $(".jifen"+id).html(data.scores+'R');
+                    if (data.error == "3") {
+                        alert("亲，库存不足，不能再多了啦！");
+                    }
+                },
+                error:function(){
+                    //请求出错处理
+                }
+            });
+            sum(id);  
+        });
+
+        //定义复选框点击事件
+        function sum(id){
+            var s = 0;
+            $(".car_tr").each(function(){
+              if($(this).find("input[type='checkbox']").attr('checked')) {
+                var t = $(this).find('.xiaoji').html();
+                var a = t.replace('￥','');
+                s += Number(a);
+              }
+            });
+            $(".total").html("￥"+s.toFixed(2));
+            $("input[name='total']").val(s.toFixed(2));
+        }
+    </script>
+{/block}

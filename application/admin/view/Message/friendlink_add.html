@@ -1,0 +1,50 @@
+{extend name="Adminpublic:public"}
+{block name="title"}友情链接管理{/block}
+{block name="main"}
+<link href="/static/admin/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<nav class="breadcrumb">
+	<i class="Hui-iconfont"></i> 
+	<a href="/admin/index" class="maincolor">首页</a> 
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">友情链接管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">友情链接添加</span>
+</nav>
+<div class="Hui-article">
+	<article class="cl pd-20">
+		<form action="/adminfriendlink/Dofriendlink_add" method="post" class="form form-horizontal" id="form-article-add" >
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>网站名称：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="请输入你的网站名称"  id="" name="name">
+			</div>
+			<i></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>URL地址：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="默认格式为：www.tmall.com" id="" name="url">
+			</div>
+			<i></i>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">站长邮箱：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" name="email" id="" placeholder="请输入站长邮箱" value="" class="input-text" >
+			</div>
+			<i style="color: red;"></i>
+		</div>
+		
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 确认添加</button>
+		
+			</div>
+		</div>
+	</form>
+	</article>
+</div>
+
+{/block}

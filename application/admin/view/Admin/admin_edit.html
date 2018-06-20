@@ -1,0 +1,198 @@
+﻿{extend name="Adminpublic:public"}
+{block name="title"}会员管理{/block}
+{block name="main"}
+
+<nav class="breadcrumb">
+	<i class="Hui-iconfont"></i> 
+	<a href="/admin/index" class="maincolor">首页</a> 
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">会员管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">会员编辑</span>
+</nav>
+<div class="Hui-article">
+	<article class="cl pd-20">
+		<form action="/adminadmin/doadmin_edit" method="post" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>ID编号：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['id']}" disabled="" >
+			</div>
+			<i style="color: red;">ID编号禁止修改</i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" name="username" class="input-text" value="{$info['username']}" disabled="">
+			</div>
+			<i style="color: red;">用户名禁止修改</i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>密码：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['password']}"  name="password">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>手机号：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['phone']}" id="mobile" name="phone">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>邮箱：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['email']}" name="email" >
+			</div>
+			<i></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>真实姓名：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['uname']}" name="uname" >
+			</div>
+			<i></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>性别：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input type="radio" name="sex" id="sex-1" {if condition="$info['sex']=='1'"}checked{/if} value="1">
+					<label for="sex-1">&nbsp;男&nbsp;&nbsp;</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="sex" {if condition="$info['sex']=='2'"}checked{/if} value="2">
+					<label for="sex-2">&nbsp;女&nbsp;&nbsp;</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-3" name="sex" {if condition="$info['sex']=='0'"}checked{/if} value="0">
+					<label for="sex-3">保密</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>状态：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input type="radio" name="status" id="status-0" {if condition="$info['status']=='0'"}checked{/if} value="0">
+					<label for="status-0">禁用</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" name="status" id="status-1" {if condition="$info['status']=='1'"}checked{/if} value="1">
+					<label for="status-1">正常</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" name="status" id="status-2" {if condition="$info['status']=='2'"}checked{/if} value="2">
+					<label for="status-2">管理员</label>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>等级：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input type="radio" name="rank" id="rank-1" {if condition="$info['rank']=='1'"}checked{/if} value="1">
+					<label for="rank-1">青铜</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" name="rank" id="rank-2" {if condition="$info['rank']=='2'"}checked{/if} value="2">
+					<label for="rank-2">白银</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" name="rank" id="rank-3" {if condition="$info['rank']=='3'"}checked{/if} value="3">
+					<label for="rank-3">黄金</label>
+				</div>
+				
+				<div class="radio-box">
+					<input type="radio" name="rank" id="rank-4" {if condition="$info['rank']=='4'"}checked{/if} value="4">
+					<label for="rank-4">铂金</label>
+				</div><br><br>
+				<div class="radio-box">
+					<input type="radio" name="rank" id="rank-5" {if condition="$info['rank']=='5'"}checked{/if} value="5">
+					<label for="rank-5">钻石</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" name="rank" id="rank-6" {if condition="$info['rank']=='6'"}checked{/if} value="6">
+					<label for="rank-6">大师</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" name="rank" id="rank-7" {if condition="$info['rank']=='7'"}checked{/if} value="7">
+					<label for="rank-7">王者</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>余额：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['money']}" name="money" >
+			</div>
+			<i></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>积分：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['scores']}" name="scores" >
+			</div>
+			<i></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>密保问题：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['safequestion']}" name="safequestion" >
+			</div>
+			<i></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>密保答案：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['safeanswer']}" name="safeanswer" >
+			</div>
+			<i></i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>注册时间：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['jointime']|date='Y-m-d H:i',###}" name="jointime" disabled="">
+			</div>
+			<i style="color: red;">注册时间禁止修改</i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>专属邀请码：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['matt']}" name="matt" disabled="">
+			</div>
+			<i style="color: red;">专属邀请码禁止修改</i>
+		</div>
+		<br>
+		<input type="hidden" name="id" value="{$info['id']}">
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-4">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确认修改&nbsp;&nbsp;">
+			</div>
+		</div>
+		<br>
+	</form>
+	</article>
+</div>
+
+{/block}
+{block name="script"}
+	<script type="text/javascript">
+		$("input[name='email']").blur(function(){
+			ob=$(this);
+			email=$("input[name='email']").val();
+			$.get("/adminajax/doajax_email",{email:email},function(data){
+			  	if (data == '00') {
+			  		ob.parent("div").next("i").html("该邮箱已经被占用，请更换");
+			  		ob.parent("div").next("i").css("color","red");
+			  	}
+			  });
+		});
+	</script>
+{/block}

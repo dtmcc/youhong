@@ -1,0 +1,64 @@
+﻿{extend name="Adminpublic:public"}
+{block name="title"}权限管理{/block}
+{block name="main"}
+
+<nav class="breadcrumb">
+	<i class="Hui-iconfont"></i> 
+	<a href="/admin/index" class="maincolor">首页</a> 
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">权限管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">权限添加</span>
+</nav>
+<div class="Hui-article">
+	<article class="cl pd-20">
+		<form action="/adminnode/donode_add" method="post" class="form form-horizontal">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权限名称：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="请输入权限名"  name="name">
+			</div>
+			<i></i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>控制器：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="请输入所属控制器"  name="mname">
+			</div>
+			<i></i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>方法：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="请输入控制器方法"  name="aname">
+			</div>
+			<i></i>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>备注：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="请输入对该权限的备注（可无）"  name="remark">
+			</div>
+		</div>
+		
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-4">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确认添加&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+	</article>
+</div>
+
+{/block}
+
+{block name="script"}
+	<script type="text/javascript">
+		
+	</script>
+
+{/block}

@@ -1,0 +1,72 @@
+{extend name="Adminpublic:public"}
+{block name="title"}订单管理{/block}
+{block name="main"}
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+<span class="c-gray en">&gt;</span> 订单管理 
+<span class="c-gray en">&gt;</span> 订单详情
+<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="text-c">
+				<input type="text" class="input-text" style="width:250px" placeholder="输入会员名称、电话或邮箱" id="" name="">
+				<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜商品</button>
+			</div>
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+			<span class="l">
+				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
+				<a href="javascript:;" onclick="member_add('添加用户','/adminmember/member_add_t','','510')" class="btn btn-primary radius">
+				<i class="Hui-iconfont">&#xe600;</i> 添加商品</a>
+			</span> 
+
+			<span class="r">共有数据：<strong>88</strong> 条</span> 
+
+			</div>
+			<div class="mt-20">
+				<table class="table table-border table-bordered table-hover table-bg table-sort">
+					<thead>
+						<tr class="text-c">
+							<th width="20"></th>
+							<th width="20">ID</th>
+							<th width="120">所属订单号</th>
+							<th width="90">商品名称</th>
+							<th width="150">商品简介</th>
+							<th width="150">商品缩略图</th>
+							<th width="100">商品单价</th>
+							<th width="80">下单数量</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach name="d_info" item="row"}
+							<tr class="text-c">
+							<td><input type="checkbox" name="" value=""></td>
+							<td>{$row['id']}</td>
+							<td>{$row['o_info']['order_code']}</td>
+							<td>{$row['p_info']['name']}</td>
+							<td>{$row['p_info']['content']}</td>
+							<td><img src="{$row['p_info']['opic']}" alt="" style="width: 100px;height: 40px;
+							"></td>
+							<td>{$row['p_info']['price']}</td>
+							<td>{$row['num']}</td>
+							</tr>
+						{/foreach}
+					</tbody>
+				</table>
+			</div>
+			<div class="text-c">
+				<br>
+				<button class="btn btn-success radius historyback">　返　回　</button>
+			</div>
+		</article>
+	</div>
+
+{/block}
+
+{block name="script"}
+<script>
+	$(".historyback").click(function(){
+		window.history.back();
+	})
+</script>
+{/block}

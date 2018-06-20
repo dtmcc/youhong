@@ -1,0 +1,83 @@
+{extend name="Homepublic:p_public" /}
+{block name="title"}个人中心{/block}
+{block name="topscript"}
+<link type="text/css" rel="stylesheet" href="/static/home/css/style.css" />
+<script type="text/javascript" src="/static/home/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/static/home/js/menu.js"></script>    
+<script type="text/javascript" src="/static/home/js/select.js"></script>
+{/block}
+
+{block name="main"}
+<div class="m_right">
+          
+    <div class="m_des">
+      <table border="0" style="width:870px; line-height:22px;" cellspacing="0" cellpadding="0">
+        <tr valign="top">
+          <td width="115">
+          {if condition="empty($p_info.face) neq true"}
+          <img src="/static/home/images/user.jpg" width="90" height="90" />
+          {else/}
+          <img src="{$m_info['face']}" width="90" height="90" />
+          {/if}
+          </td>
+          <td>
+              <div class="m_user" style="color:red;">{$m_info['username']}</div>
+              <p>
+                  等级：{$rankarr[$m_info['rank']]} <br />
+                  <font color="#ff4e00">您还差 270 积分达到 分红100</font><br />
+                  账户注册时间: {$m_info['jointime']|date="Y-m-d H:i:s",###}<br />
+                  您还没有通过邮件认证 <a href="#" style="color:#ff4e00;">点此发送认证邮件</a>
+              </p>
+              <div class="m_notice">
+                  用户中心公告！
+              </div>
+          </td>
+        </tr>
+      </table>    
+  </div>
+            
+            <div class="mem_t">资产信息</div>
+            <table border="0" class="mon_tab" style="width:870px; margin-bottom:20px;" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="33%">用户等级：<span style="color:#555555;">普通会员</span></td>
+                <td width="33%">消费金额：<span>￥200元</span></td>
+                <td width="33%">返还积分：<span>99R</span></td>
+              </tr>
+              <tr>
+                <td>账户余额：<span>￥200元</span></td></td>
+                <td>红包个数：<span style="color:#555555;">3个</span></td></td>
+                <td>红包价值：<span>￥50元</span></td></td>
+              </tr>
+              <tr>
+                <td colspan="3">订单提醒：
+                  <font style="font-family:'宋体';">待付款(<span>0</span>) &nbsp; &nbsp; &nbsp; &nbsp; 待收货(<span>2</span>) &nbsp; &nbsp; &nbsp; &nbsp; 待评论(<span>1</span>)</font>
+                </td>
+              </tr>
+            </table>
+
+            <div class="mem_t">账号信息</div>
+            <table border="0" class="mon_tab" style="width:870px; margin-bottom:20px;" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="40%">用户ID：<span style="color:#555555;">{$m_info['id']}</span></td>
+                <td width="60%">真实姓名：<span style="color:#555555;">{$p_username}</span></td>
+              </tr>
+              <tr>
+                <td>电&nbsp; &nbsp; 话：<span style="color:#555555;">{$m_info['phone']}</span></td>
+                <td>邮&nbsp; &nbsp; 箱：<span style="color:#555555;">{$m_info['email']}</span></td>
+              </tr>
+              <tr>
+                <td>注册时间：<span style="color:#555555;">{$m_info['jointime']|date="Y-m-d H:i:s",###}</span></td>
+                <td>邀请人：<span style="color:#555555;"><a href="javascript:;" onclick="fun(this,'{$p_username}')" title="点击查看邀请人联系方式">{$p_username}</a></span></td>
+              </tr>
+            </table>
+
+            <script type="text/javascript" src="/static/jquery-1.8.3.min.js"></script> 
+            <script type="text/javascript">
+              function fun(obj,username){
+                $.post("/homepersonal/query_matt",{username:username},function(data){
+                  alert("电话："+data.phone+"\n"+"邮箱："+data.email);
+                },"json")
+              }
+            </script>
+        </div>
+{/block}

@@ -1,0 +1,67 @@
+﻿{extend name="Adminpublic:public"}
+{block name="title"}类别管理{/block}
+{block name="main"}
+
+<nav class="breadcrumb">
+	<i class="Hui-iconfont"></i> 
+	<a href="/admin/index" class="maincolor">首页</a> 
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">类别管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">类别添加</span>
+</nav>
+<div class="Hui-article">
+	<article class="cl pd-20">
+		<form action="/admincategory/docategory_add_f" method="post" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">* </span>父级类别：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$data['name']}" disabled="">
+			</div>
+			<i></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>子级类别：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" name="name" value="" placeholder="请输入添加的子级类别名" >
+			</div>
+			<i></i>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-4">
+			<input type="hidden" name="pid" value="{$data['id']}">
+			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确认添加&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+	</article>
+</div>
+
+{/block}
+
+{block name="script"}
+	<script type="text/javascript">
+		$("input[name='username']").blur(function(){
+			ob=$(this);
+			username=$("input[name='username']").val();
+			$.get("/adminajax/doajax_username",{username:username},function(data){
+			  	if (data == '00') {
+			  		ob.parent("div").next("i").html("　　该用户名已经存在，请更换");
+			  		ob.parent("div").next("i").css("color","red");
+			  	}
+			  });
+		});
+		$("input[name='email']").blur(function(){
+			ob=$(this);
+			email=$("input[name='email']").val();
+			$.get("/adminajax/doajax_email",{email:email},function(data){
+			  	if (data == '00') {
+			  		ob.parent("div").next("i").html("　　该邮箱已经被占用，请更换");
+			  		ob.parent("div").next("i").css("color","red");
+			  	}
+			  });
+		});
+	</script>
+
+{/block}

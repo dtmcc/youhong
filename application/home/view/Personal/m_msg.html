@@ -1,0 +1,113 @@
+{extend name="Homepublic:p_public" /}
+{block name="title"}我的留言{/block}
+{block name="topscript"}
+<link type="text/css" rel="stylesheet" href="/static/home/css/style.css" />
+<script type="text/javascript" src="/static/home/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/static/home/js/menu.js"></script>    
+<script type="text/javascript" src="/static/home/js/select.js"></script>       
+{/block}
+
+{block name="main"}
+<div class="m_right">
+  <p></p>
+  <div class="mem_tit">我的留言</div>
+  <div class="address">
+    
+    <table  class="add_t order_tab" align="center" style="width:98%; margin:10px auto;border: 1px solid #ccc" cellspacing="0" cellpadding="0">
+        <thead align="center" style="background-color:#F6F6F6;" >
+        <tr>
+          <td>类型</td>
+          <td>主题</td>
+          <td>内容</td>
+          <td>附件</td>
+          <td>状态</td>
+          <td style="width: 120px;">操作</td>
+        </tr>
+        </thead>
+        <tbody align="center">
+        {foreach name="mes_info" item="row"}
+          <tr>
+            <td>{$row['type']}</td>
+            <td>{$row['theme']}</td>
+            <td>{$row['content']}</td>
+            <td><img src="{$row['pic']}" alt="" style="height: 300px;height: 35px;"></td>
+            <td>{$statusarr[$row['status']]}</td>
+            <td>
+              {if condition="$row.status == '1'"}
+              <a href="javascript:void(0);" class="look" k="{$row['id']}">查看回复</a>
+              {else/}
+              <a href="javascript:void(0);" class="ducu">督促回复</a>
+              {/if}
+              <a href="javascript:void(0);" onClick="message_del(this,'{$row['id']}')">删除</a>
+            </td>
+          </tr>
+        {/foreach}
+        </tbody>
+    </table>
+  </div>
+  <div class="mem_tit">添加留言</div>
+  <form action="/homepersonal/domessage_add" method="post" enctype="multipart/form-data">
+  <table border="0" style="width:880px; margin-top:20px;" cellspacing="0" cellpadding="0">
+    <tbody><tr height="45">
+      <td width="80" align="right">留言类型 &nbsp; &nbsp;</td>
+      <td>                            
+          <label class="r_rad r_txt"><input type="radio" name="type" value="咨询" style="margin-top: -2px;" checked="checked"> 咨询</label>
+          <label class="r_rad r_txt"><input type="radio" name="type" value="建议" style="margin-top: -2px;"> 建议</label>
+          <label class="r_rad r_txt"><input type="radio" name="type" value="求购" style="margin-top: -2px;"> 求购</label>
+          <label class="r_rad r_txt"><input type="radio" name="type" value="投诉" style="margin-top: -2px;"> 投诉</label>
+          <label class="r_rad r_txt"><input type="radio" name="type" value="售后" style="margin-top: -2px;"> 售后</label>
+      </td>
+    </tr>
+    <tr height="45">
+      <td align="right">主题 &nbsp; &nbsp;</td>
+      <td><input type="text" name="theme" value="" class="add_ipt" style="width:290px;"></td>
+    </tr>
+    <tr valign="top" height="110">
+      <td align="right">留言内容 &nbsp; &nbsp;</td>
+      <td style="padding-top:5px;"><textarea class="add_txt" name="content"></textarea></td>
+    </tr>
+    <tr height="45">
+      <td align="right">上传文件 &nbsp; &nbsp;</td>
+      <td><input type="file" name="pic"></td>
+    </tr>
+    <tr height="50">
+      <td>&nbsp;</td>
+      <td style="line-height:20px;">
+        <font color="#ff4e00">小提示：</font><br>
+          您可以上传以下格式的文件：gif、jpg、png、word、excel、txt、zip、ppt、pdf
+      </td>
+    </tr>
+    <tr height="50" valign="bottom">
+      <td>&nbsp;</td>
+      <td><input type="submit" value="提交" class="btn_tj"></td>
+    </tr>
+  </tbody>
+  </table>
+  </form>
+</div>
+
+<script type="text/javascript" src="/static/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+function message_del(obj,id){
+  var a = confirm("数据无价，谨慎操作，确定删除？");
+  if (a == true) {
+    //修改数据库状态
+    $.post("/adminajax/message_del",{id:id},function(data){console.log(data)});
+    $(obj).parents("tr").remove();
+    alert("删除成功！");
+  }
+
+$(".look").click(function(){
+  k=$(".look").attr("k");
+  $.post("/homepersonal/look_replay",{id:k},function(data){
+    alert(data);
+  })
+})
+$(".ducu").click(function(){
+  alert("亲，已经督促网站客服尽快回复您！");
+})
+}
+</script>
+{/block}
+{block name="script"}
+{/block}

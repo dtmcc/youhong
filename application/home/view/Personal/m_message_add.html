@@ -1,0 +1,81 @@
+{extend name="Homepublic:p_public" /}
+{block name="title"}商品评价{/block}
+{block name="topscript"}
+<link type="text/css" rel="stylesheet" href="/static/home/css/style.css" />
+<script type="text/javascript" src="/static/home/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/static/home/js/menu.js"></script>    
+<script type="text/javascript" src="/static/home/js/select.js"></script>       
+{/block}
+
+{block name="main"}
+<div class="m_right">
+  
+  <div class="mem_tit">商品评价</div>
+  <form action="/homepersonal/docomment_add" method="post" >
+  <table border="0" style="width:880px; margin-top:20px;" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr height="45">
+      <td width="80" align="right">商品图 &nbsp;&nbsp; &nbsp;&nbsp;</td>
+      <td>
+      <img src="{$d_info['p_info']['opic']}" alt="" style="width: 150px;height: 120px;border: 1px dotted #ccc;"> 
+      </td>
+    </tr>
+    <tr height="45">
+      <td align="right">商品名 &nbsp;&nbsp; &nbsp;&nbsp;</td>
+      <td><span>{$d_info['p_info']['name']}</span></td>
+    </tr>
+    <tr valign="top">
+      <td align="right">商品简介 &nbsp;&nbsp; &nbsp;&nbsp;</td>
+      <td><span>{$d_info['p_info']['content']}</span></td>
+    </tr>
+    <tr height="45">
+      <td align="right"></td>
+      <td>
+          <label class="r_rad r_txt"><input type="radio" name="grade" value="1" style="margin-top: -2px;" checked="checked"> 好评&nbsp; &nbsp;</label>
+          <label class="r_rad r_txt"><input type="radio" name="grade" value="2" style="margin-top: -2px;"> 中评&nbsp; &nbsp;</label>
+          <label class="r_rad r_txt"><input type="radio" name="grade" value="2" style="margin-top: -2px;"> 差评</label>
+    </tr>
+    <tr height="50">
+      <td align="right">评价内容 &nbsp;&nbsp; &nbsp;&nbsp;</td>
+      <td style="padding-top:5px;">
+      <textarea class="add_txt" name="text" placeholder="请写下对宝贝的评价吧，对别人的帮助很大喲！"></textarea>  
+      </td>
+    </tr>
+    <tr height="50" valign="bottom">
+      <td>&nbsp;
+        <input type="hidden" name="d_id" value="{$d_info['id']}">
+        <input type="hidden" name="p_id" value="{$d_info['p_info']['id']}">
+        <input type="hidden" name="source" value="{$d_info['source']}">
+      </td>
+      <td><input type="submit" value="提交" class="btn_tj"></td>
+    </tr>
+  </tbody>
+  </table>
+  </form>
+</div>
+
+<script type="text/javascript" src="/static/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+function message_del(obj,id){
+  var a = confirm("数据无价，谨慎操作，确定删除？");
+  if (a == true) {
+    //修改数据库状态
+    $.post("/adminajax/message_del",{id:id},function(data){console.log(data)});
+    $(obj).parents("tr").remove();
+    alert("删除成功！");
+  }
+
+$(".look").click(function(){
+  k=$(".look").attr("k");
+  $.post("/homepersonal/look_replay",{id:k},function(data){
+    alert(data);
+  })
+})
+$(".ducu").click(function(){
+  alert("亲，已经督促网站客服尽快回复您！");
+})
+}
+</script>
+{/block}
+{block name="script"}
+{/block}

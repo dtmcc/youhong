@@ -1,0 +1,56 @@
+﻿{extend name="Adminpublic:public"}
+{block name="title"}会员管理{/block}
+{block name="main"}
+
+<nav class="breadcrumb">
+	<i class="Hui-iconfont"></i> 
+	<a href="/admin/index" class="maincolor">首页</a> 
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">会员管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">会员编辑</span>
+</nav>
+<div class="Hui-article">
+	<article class="cl pd-20">
+		<form action="/adminrole/dorole_edit" method="post" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>ID编号：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="{$info['id']}" disabled="" >
+			</div>
+			<i style="color: red;">ID编号禁止修改</i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" name="rname" value="{$info['rname']}"  >
+			</div>
+			<i style="color: red;"></i>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色描述：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" name="remark" value="{$info['remark']}" >
+			</div>
+			<i style="color: red;"></i>
+		</div>
+
+		
+		<br>
+		<input type="hidden" name="id" value="{$info['id']}">
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-4">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确认修改&nbsp;&nbsp;">
+			</div>
+		</div>
+		<br>
+	</form>
+	</article>
+</div>
+
+{/block}
+{block name="script"}
+	<script type="text/javascript">
+		
+	</script>
+{/block}

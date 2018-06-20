@@ -1,0 +1,79 @@
+﻿{extend name="Adminpublic:public"}
+{block name="title"}留言管理{/block}
+{block name="main"}
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+<span class="c-gray en">&gt;</span> 留言管理 
+<span class="c-gray en">&gt;</span> 新增留言列表
+<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+			<span class="l">
+				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
+				<a href="javascript:;" onclick="member_add('添加用户','/adminmember/member_add_t','','510')" class="btn btn-primary radius">
+				<i class="Hui-iconfont">&#xe600;</i> 添加商品</a>
+			</span> 
+
+			<span class="r">共有数据：<strong>88</strong> 条</span> 
+
+			</div>
+			<div class="mt-20">
+				<table class="table table-border table-bordered table-hover table-bg table-sort">
+					<thead>
+						<tr class="text-c">
+							<th width="25"><input type="checkbox" name="" value=""></th>
+							<th width="30">ID</th>
+							<th width="80">留言用户</th>
+							<th width="80">类型</th>
+							<th width="100">主题</th>
+							<th width="200">内容</th>
+							<th width="100">附件</th>
+							<th width="80">状态</th>
+							<th width="80">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					{foreach name="mes_info" item="row"}
+						<tr class="text-c">
+							<td><input type="checkbox" value="1" name=""></td>
+							<td>{$row['id']}</td>
+							<td>{$row['username']}</td>
+							<td>{$row['type']}</td>
+							<td>{$row['theme']}</td>
+							<td>{$row['content']}</td>
+							<td><img src="{$row['pic']}" alt="" style="width: 100px;height: 35px;"></td>
+							<td class="td-status">{$statusarr[$row['status']]}</td>
+							<td class="td-manage">
+							{if condition="$row.status == '0'"}	
+							<a title="去回复" href="/adminmessage/message_edit/id/{$row['id']}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+							&nbsp; 
+							{else if}
+							 <!-- <a title="点击查看详情" href="/adminmessage/message_details/id/{$row['id']}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+							&nbsp;  -->
+							{/if}
+							<a style="text-decoration:none" onClick="message_del(this,'{$row['id']}')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe609;</i></a>
+							</td>
+						</tr>
+					{/foreach}
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</div>
+
+{/block}
+
+{block name="script"}
+	<script>
+		function message_del(obj,id){
+			layer.confirm('确认要删除吗？',function(index){
+				//修改数据库状态
+				$.post("/adminajax/message_del",{id:id},function(data){console.log(data)});
+				$(obj).parents("tr").remove();
+				layer.msg('已删除!',{icon:1,time:1000});
+			});
+		}
+	</script>
+{/block}
